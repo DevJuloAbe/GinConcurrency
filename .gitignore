@@ -1,0 +1,38 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, build output
+*.test
+*.out
+
+# Go workspace file
+go.work
+
+# Dependency directories
+vendor/
+
+# Generated files
+*.log
+*.tmp
+*.temp
+
+# Environment files
+.env
+
+# IDE/editor files
+.vscode/
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Docker
+docker-compose.override.yml
+
+# Logs
+logs/
