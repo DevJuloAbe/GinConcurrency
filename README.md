@@ -9,7 +9,7 @@ server:
   port: ":8080"
 
 database:
-  dsn: "root:admin@julo2026!@tcp(127.0.0.1:3306)/gin_api?charset=utf8mb4&parseTime=True&loc=Local"
+  dsn: "root:admin@jPASSWORDMO!@tcp(127.0.0.1:3306)/gin_api?charset=utf8mb4&parseTime=True&loc=Local"
 
 redis:
   addr: "127.0.0.1:6379"
