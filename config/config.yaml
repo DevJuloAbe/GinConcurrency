@@ -1,9 +1,14 @@
+# Application server settings.
+# The port can be overridden by the PORT environment variable.
 server:
   port: ":8080"
 
+# Database connection string for MySQL, PostgreSQL, or another supported driver.
+# Use environment variables for secrets in production.
 database:
   dsn: "root:admin@julo2026!@tcp(127.0.0.1:3306)/gin_api?charset=utf8mb4&parseTime=True&loc=Local"
 
+# Redis connection settings.
 redis:
   addr: "127.0.0.1:6379"
   password: ""

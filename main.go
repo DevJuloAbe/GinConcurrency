@@ -16,6 +16,7 @@ import (
 	"github.com/goccy/go-yaml"
 )
 
+// AppConfig defines the application configuration loaded from YAML and overridden by environment variables.
 type AppConfig struct {
 	Server struct {
 		Port string `yaml:"port"`
@@ -31,6 +32,7 @@ type AppConfig struct {
 }
 
 func main() {
+	// Load application configuration from the YAML file and apply environment overrides.
 	cfg, err := loadConfig("config/config.yaml")
 	if err != nil {
 		log.Fatal("Failed to load config:", err)
@@ -67,6 +69,8 @@ func main() {
 	}
 }
 
+// serverPort returns the bind address for the web server.
+// It prefers the PORT environment variable, then the config file value, and finally defaults to :8080.
 func serverPort(configPort string) string {
 	port := strings.TrimSpace(os.Getenv("PORT"))
 	if port == "" {
@@ -81,6 +85,8 @@ func serverPort(configPort string) string {
 	return ":" + port
 }
 
+// loadConfig reads the YAML configuration file, merges it into AppConfig,
+// and then applies any environment variable overrides.
 func loadConfig(path string) (*AppConfig, error) {
 	config := AppConfig{}
 	config.Server.Port = ":8080"
@@ -102,6 +108,8 @@ func loadConfig(path string) (*AppConfig, error) {
 	return &config, nil
 }
 
+// applyEnvOverrides updates configuration values from environment variables.
+// This is helpful for deployment and secrets management without editing config files.
 func applyEnvOverrides(config *AppConfig) error {
 	if value, ok := firstEnv("DATABASE_DSN", "DB_DSN"); ok {
 		config.Database.DSN = value
@@ -123,6 +131,7 @@ func applyEnvOverrides(config *AppConfig) error {
 	return nil
 }
 
+// firstEnv returns the first non-empty environment value from the provided names.
 func firstEnv(names ...string) (string, bool) {
 	for _, name := range names {
 		if value := strings.TrimSpace(os.Getenv(name)); value != "" {
